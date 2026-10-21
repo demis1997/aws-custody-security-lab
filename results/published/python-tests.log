@@ -1,0 +1,34 @@
+test_authorizer_cannot_override_signer_recipient_policy (test_compromise.CompromiseTests.test_authorizer_cannot_override_signer_recipient_policy) ... ok
+test_authorizer_compromise_can_permit_business_fraud_within_policy (test_compromise.CompromiseTests.test_authorizer_compromise_can_permit_business_fraud_within_policy) ... ok
+test_consistent_budget_rejects_second_sixty_unit_intent (test_compromise.CompromiseTests.test_consistent_budget_rejects_second_sixty_unit_intent) ... ok
+test_coordinator_cannot_create_approvals (test_compromise.CompromiseTests.test_coordinator_cannot_create_approvals) ... ok
+test_divergent_ledgers_can_each_accept_sixty_units (test_compromise.CompromiseTests.test_divergent_ledgers_can_each_accept_sixty_units) ... ok
+test_expired_approval_rejected_before_new_issuance (test_compromise.CompromiseTests.test_expired_approval_rejected_before_new_issuance) ... ok
+test_key_policy_compromise_is_one_share_not_threshold_hardware (test_compromise.CompromiseTests.test_key_policy_compromise_is_one_share_not_threshold_hardware) ... ok
+test_one_approver_is_not_sufficient (test_compromise.CompromiseTests.test_one_approver_is_not_sufficient) ... ok
+test_one_domain_admin_stays_in_one_domain (test_compromise.CompromiseTests.test_one_domain_admin_stays_in_one_domain) ... ok
+test_org_management_with_member_admin_trust_controls_quorum (test_compromise.CompromiseTests.test_org_management_with_member_admin_trust_controls_quorum) ... ok
+test_org_management_without_member_trust_only_removes_guardrails (test_compromise.CompromiseTests.test_org_management_without_member_trust_only_removes_guardrails) ... ok
+test_shared_deployment_collapses_account_separation (test_compromise.CompromiseTests.test_shared_deployment_collapses_account_separation) ... ok
+test_single_signer_cannot_control_quorum (test_compromise.CompromiseTests.test_single_signer_cannot_control_quorum) ... ok
+test_stolen_one_domain_role_cannot_assume_another_in_model (test_compromise.CompromiseTests.test_stolen_one_domain_role_cannot_assume_another_in_model) ... ok
+test_tampering_approved_transaction_is_rejected (test_compromise.CompromiseTests.test_tampering_approved_transaction_is_rejected) ... ok
+test_two_compromised_signers_control_direct_authority (test_compromise.CompromiseTests.test_two_compromised_signers_control_direct_authority) ... ok
+test_wrong_chain_domain_rejected (test_compromise.CompromiseTests.test_wrong_chain_domain_rejected) ... ok
+test_forged_checkpoint_cannot_become_trusted_merely_by_relabeling (test_recovery.RecoveryTests.test_forged_checkpoint_cannot_become_trusted_merely_by_relabeling) ... ok
+test_lost_checkpoint_fails_closed (test_recovery.RecoveryTests.test_lost_checkpoint_fails_closed) ... ok
+test_old_authorization_policy_rejected (test_recovery.RecoveryTests.test_old_authorization_policy_rejected) ... ok
+test_old_matching_checkpoint_rejected_by_independent_latest_anchor (test_recovery.RecoveryTests.test_old_matching_checkpoint_rejected_by_independent_latest_anchor) ... ok
+test_old_policy_snapshot_rejected_after_epoch_checkpoint_advances (test_recovery.RecoveryTests.test_old_policy_snapshot_rejected_after_epoch_checkpoint_advances) ... ok
+test_one_recovery_operator_cannot_restore (test_recovery.RecoveryTests.test_one_recovery_operator_cannot_restore) ... ok
+test_one_signer_lost_surviving_quorum_remains_available (test_recovery.RecoveryTests.test_one_signer_lost_surviving_quorum_remains_available) ... ok
+test_quorum_survives_valid_restore_without_resetting_spend (test_recovery.RecoveryTests.test_quorum_survives_valid_restore_without_resetting_spend) ... ok
+test_replay_consumed_approval_rejected_after_valid_restore (test_recovery.RecoveryTests.test_replay_consumed_approval_rejected_after_valid_restore) ... ok
+test_rolling_back_both_state_and_trusted_anchor_reenables_replay (test_recovery.RecoveryTests.test_rolling_back_both_state_and_trusted_anchor_reenables_replay) ... ok
+test_stale_backup_rejected_against_current_checkpoint (test_recovery.RecoveryTests.test_stale_backup_rejected_against_current_checkpoint) ... ok
+test_two_signers_lost_fail_closed (test_recovery.RecoveryTests.test_two_signers_lost_fail_closed) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 0.002s
+
+OK

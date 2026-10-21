@@ -1,0 +1,11 @@
+name = "custody-authorization"
+account_id = "555555555555"
+kind = "authorization"
+cidr = "10.50.0.0/16"
+ami_id = "ami-0123456789abcdef0" # Placeholder, not a deployable image recommendation.
+operator_arns = ["arn:aws:iam::555555555555:role/IndependentHumanOperator"]
+key_admin_arns = ["arn:aws:iam::555555555555:role/IndependentKeyAdmin", "arn:aws:iam::555555555555:role/IndependentProvisioner"]
+audit_bucket_name = "replace-with-security-account-audit-bucket"
+recovery_bucket_name = "replace-with-recovery-account-evidence-bucket"
+peer_cidrs = [] # Explicit peer ranges and reviewed peering routes are required.
+deployment_acknowledged = false

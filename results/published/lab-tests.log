@@ -1,0 +1,14 @@
+tests/security.tftest.hcl... in progress
+  run "private_host_and_bound_keys"... pass
+  run "reject_unacknowledged_deployment"... pass
+  run "reject_world_peer"... pass
+  run "reject_wildcard_operator"... pass
+  run "coordinator_has_no_signer_backup_policy"... pass
+  run "reject_public_half_internet_peer"... pass
+  run "reject_public_workload_network"... pass
+  run "reject_unapproved_peer_route"... pass
+  run "explicit_cross_account_peer_routes_plan"... pass
+tests/security.tftest.hcl... tearing down
+tests/security.tftest.hcl... pass
+
+Success! 9 passed, 0 failed.

@@ -1,0 +1,7 @@
+tests/security.tftest.hcl... in progress
+  run "guardrail_configuration_plans"... pass
+  run "guardrails_require_explicit_deployment_acknowledgment"... pass
+tests/security.tftest.hcl... tearing down
+tests/security.tftest.hcl... pass
+
+Success! 2 passed, 0 failed.

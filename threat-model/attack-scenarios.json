@@ -1,0 +1,159 @@
+{
+  "scope": "Local architectural models and mocked Terraform plan assertions; no live AWS attacks.",
+  "scenarios": [
+    {
+      "id": "compromised-signer-a",
+      "attacker_prerequisites": "Host A code execution",
+      "target_assets": "One share and signing process",
+      "boundary": "Host to signing participant",
+      "expected_defense": "Require two independently controlled shares",
+      "test": "test_single_signer_cannot_control_quorum",
+      "expected_result": "No quorum",
+      "actual_result": "Model: blocked",
+      "remaining_risk": "Live host still controls one share"
+    },
+    {
+      "id": "compromised-coordinator",
+      "attacker_prerequisites": "Coordinator execution",
+      "target_assets": "Approval evidence and issued bytes",
+      "boundary": "Orchestration to authorization",
+      "expected_defense": "Independent approval and signer checks",
+      "test": "test_coordinator_cannot_create_approvals",
+      "expected_result": "No new unauthorized issuance",
+      "actual_result": "Model: blocked",
+      "remaining_risk": "Already issued bytes remain portable; no live RPC test here"
+    },
+    {
+      "id": "stolen-iam-role",
+      "attacker_prerequisites": "Runtime/deploy A credentials stolen",
+      "target_assets": "Other account roles",
+      "boundary": "Cross-account STS trust",
+      "expected_defense": "No cross-domain assume-role grant",
+      "test": "test_stolen_one_domain_role_cannot_assume_another_in_model",
+      "expected_result": "No B access",
+      "actual_result": "Model: blocked",
+      "remaining_risk": "Real IAM evaluation and credential theft not executed"
+    },
+    {
+      "id": "compromised-ci",
+      "attacker_prerequisites": "Common pipeline can replace every signer",
+      "target_assets": "Quorum execution",
+      "boundary": "Shared release to all domains",
+      "expected_defense": "Independent release approval required",
+      "test": "test_shared_deployment_collapses_account_separation",
+      "expected_result": "Unsafe shared authority defeats isolation",
+      "actual_result": "Model: quorum controlled",
+      "remaining_risk": "Terraform cannot prove human release independence"
+    },
+    {
+      "id": "malicious-admin",
+      "attacker_prerequisites": "Administrator in A",
+      "target_assets": "Host and key policy A",
+      "boundary": "Administrative to signing domain",
+      "expected_defense": "Separate administration across domains",
+      "test": "test_one_domain_admin_stays_in_one_domain",
+      "expected_result": "One domain remains insufficient",
+      "actual_result": "Model: no quorum",
+      "remaining_risk": "Two domain admins or common account recovery defeat assumption"
+    },
+    {
+      "id": "cross-account-escalation",
+      "attacker_prerequisites": "A deploy identity",
+      "target_assets": "B runtime/admin role",
+      "boundary": "AWS account trust",
+      "expected_defense": "Exact trust; no shared deployment role",
+      "test": "test_stolen_one_domain_role_cannot_assume_another_in_model",
+      "expected_result": "Blocked without declared edge",
+      "actual_result": "Model + exact-trust Terraform assertions",
+      "remaining_risk": "No live AssumeRole or Access Analyzer run"
+    },
+    {
+      "id": "compromised-recovery-operator",
+      "attacker_prerequisites": "One restore operator",
+      "target_assets": "Backup selection and restored state",
+      "boundary": "Recovery to current signing history",
+      "expected_defense": "Independent current anchor and two restore approvals",
+      "test": "test_one_recovery_operator_cannot_restore",
+      "expected_result": "Reject one approver",
+      "actual_result": "Model: recovery-quorum rejection",
+      "remaining_risk": "Two-person approval is modeled, not enforced by S3"
+    },
+    {
+      "id": "checkpoint-rollback",
+      "attacker_prerequisites": "Old matching snapshot/checkpoint",
+      "target_assets": "Nonce and consumed history",
+      "boundary": "Stored evidence to trusted latest",
+      "expected_defense": "Compare independent current anchor",
+      "test": "test_old_matching_checkpoint_rejected_by_independent_latest_anchor",
+      "expected_result": "Reject stale pair",
+      "actual_result": "Model: stale-checkpoint rejection",
+      "remaining_risk": "Joint trusted-anchor rollback permits replay"
+    },
+    {
+      "id": "kms-policy-compromise",
+      "attacker_prerequisites": "Key policy administrator A",
+      "target_assets": "Envelope plaintext A",
+      "boundary": "Policy admin to key use",
+      "expected_defense": "Independent key administration and other signers",
+      "test": "test_key_policy_compromise_is_one_share_not_threshold_hardware",
+      "expected_result": "One key insufficient; two key domains sufficient",
+      "actual_result": "Model: expected boundary",
+      "remaining_risk": "No actual KMS grant/decryption API call"
+    },
+    {
+      "id": "unauthorized-approval",
+      "attacker_prerequisites": "One approver or forged evidence",
+      "target_assets": "Transaction intent",
+      "boundary": "Human approval to signer acceptance",
+      "expected_defense": "Two bound approvals plus standing policy",
+      "test": "test_one_approver_is_not_sufficient",
+      "expected_result": "Reject partial approval",
+      "actual_result": "Model: blocked",
+      "remaining_risk": "Both approval keys can misrepresent intent within policy"
+    },
+    {
+      "id": "network-isolation-failure",
+      "attacker_prerequisites": "Broad public peer CIDR proposed",
+      "target_assets": "Private signing service",
+      "boundary": "Network reachability",
+      "expected_defense": "Private CIDR validation; no public IP/SSH",
+      "test": "Terraform reject_world_peer/reject_public_half_internet_peer",
+      "expected_result": "Reject unsafe configuration",
+      "actual_result": "Mocked Terraform plan: rejected",
+      "remaining_risk": "Packet-level isolation/mTLS not tested"
+    },
+    {
+      "id": "audit-log-tampering",
+      "attacker_prerequisites": "Attempt altered/deleted evidence",
+      "target_assets": "Retained audit history",
+      "boundary": "Producer/admin to audit storage",
+      "expected_defense": "Versioning, compliance retention, service-scoped delivery",
+      "test": "Terraform locked_private_versioned_evidence",
+      "expected_result": "Retention/private access configured",
+      "actual_result": "Mocked resource assertions; S3 delete Not Executed",
+      "remaining_risk": "Management, retention expiry, delivery and validation still matter"
+    },
+    {
+      "id": "quorum-availability",
+      "attacker_prerequisites": "One or two signer processes unavailable",
+      "target_assets": "Signing liveness",
+      "boundary": "Participant set to quorum",
+      "expected_defense": "Two live participants required",
+      "test": "test_one_signer_lost_surviving_quorum_remains_available / test_two_signers_lost_fail_closed",
+      "expected_result": "One loss accepted; two fail closed",
+      "actual_result": "Model: matched both outcomes",
+      "remaining_risk": "No native timeout, restart, DKG or AWS outage exercise"
+    },
+    {
+      "id": "organizations-management",
+      "attacker_prerequisites": "Management account compromise",
+      "target_assets": "SCP and member trust",
+      "boundary": "Organization to member administration",
+      "expected_defense": "Do not retain shared admin trust; independent recovery",
+      "test": "test_org_management_without_member_trust_only_removes_guardrails / test_org_management_with_member_admin_trust_controls_quorum",
+      "expected_result": "Only shared member admin trust yields quorum path",
+      "actual_result": "Model: both cases matched",
+      "remaining_risk": "Management can remove SCPs; other billing/provider paths remain"
+    }
+  ]
+}

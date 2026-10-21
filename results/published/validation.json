@@ -1,0 +1,202 @@
+{
+  "executed_at": "2026-10-21T16:55:41.366070+00:00",
+  "python": "3.15.0",
+  "status": "passed",
+  "scope": "Local models, static configuration and mocked plan-only Terraform. No AWS resource operations.",
+  "checks": [
+    {
+      "check": "publication",
+      "command": [
+        "/opt/homebrew/opt/python@3.15/bin/python3.15",
+        "scripts/check-publication.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "python-tests",
+      "command": [
+        "/opt/homebrew/opt/python@3.15/bin/python3.15",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "experiments/tests",
+        "-v"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "model-scenarios",
+      "command": [
+        "/opt/homebrew/opt/python@3.15/bin/python3.15",
+        "experiments/run.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "mutation-checks",
+      "command": [
+        "/opt/homebrew/opt/python@3.15/bin/python3.15",
+        "experiments/mutation_checks.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "terraform-format",
+      "command": [
+        "terraform",
+        "fmt",
+        "-check",
+        "-recursive",
+        "terraform"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "lab-init",
+      "command": [
+        "terraform",
+        "-chdir=terraform/environments/lab",
+        "init",
+        "-backend=false",
+        "-input=false",
+        "-lockfile=readonly",
+        "-no-color"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "lab-validate",
+      "command": [
+        "terraform",
+        "-chdir=terraform/environments/lab",
+        "validate",
+        "-no-color"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "lab-tests",
+      "command": [
+        "terraform",
+        "-chdir=terraform/environments/lab",
+        "test",
+        "-no-color"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "security-init",
+      "command": [
+        "terraform",
+        "-chdir=terraform/environments/security",
+        "init",
+        "-backend=false",
+        "-input=false",
+        "-lockfile=readonly",
+        "-no-color"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "security-validate",
+      "command": [
+        "terraform",
+        "-chdir=terraform/environments/security",
+        "validate",
+        "-no-color"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "security-tests",
+      "command": [
+        "terraform",
+        "-chdir=terraform/environments/security",
+        "test",
+        "-no-color"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "recovery-init",
+      "command": [
+        "terraform",
+        "-chdir=terraform/environments/recovery",
+        "init",
+        "-backend=false",
+        "-input=false",
+        "-lockfile=readonly",
+        "-no-color"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "recovery-validate",
+      "command": [
+        "terraform",
+        "-chdir=terraform/environments/recovery",
+        "validate",
+        "-no-color"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "recovery-tests",
+      "command": [
+        "terraform",
+        "-chdir=terraform/environments/recovery",
+        "test",
+        "-no-color"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "organization-init",
+      "command": [
+        "terraform",
+        "-chdir=terraform/environments/organization",
+        "init",
+        "-backend=false",
+        "-input=false",
+        "-lockfile=readonly",
+        "-no-color"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "organization-validate",
+      "command": [
+        "terraform",
+        "-chdir=terraform/environments/organization",
+        "validate",
+        "-no-color"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "organization-tests",
+      "command": [
+        "terraform",
+        "-chdir=terraform/environments/organization",
+        "test",
+        "-no-color"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "diagram-rebuild",
+      "command": [
+        "/opt/homebrew/opt/python@3.15/bin/python3.15",
+        "architecture/diagrams/render.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "follow_up": {
+    "executed_at": "2026-10-21T17:02:02.529884+00:00",
+    "scope": "Final workload validate and all nine mocked plan runs after two added peering tests; other roots unchanged.",
+    "status": "passed",
+    "workload_plan_runs": 9
+  }
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "mutation": "one-share-quorum",
+    "expected": "tests fail",
+    "actual": "tests failed as expected",
+    "return_code": 1,
+    "required_failure": "test_single_signer_cannot_control_quorum"
+  },
+  {
+    "mutation": "remove-trusted-latest-check",
+    "expected": "tests fail",
+    "actual": "tests failed as expected",
+    "return_code": 1,
+    "required_failure": "test_old_matching_checkpoint_rejected_by_independent_latest_anchor"
+  }
+]

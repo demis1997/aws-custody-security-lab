@@ -1,0 +1,8 @@
+tests/security.tftest.hcl... in progress
+  run "audit_delivery_is_service_and_source_bound"... pass
+  run "audit_requires_explicit_deployment_acknowledgment"... pass
+  run "locked_private_versioned_evidence"... pass
+tests/security.tftest.hcl... tearing down
+tests/security.tftest.hcl... pass
+
+Success! 3 passed, 0 failed.

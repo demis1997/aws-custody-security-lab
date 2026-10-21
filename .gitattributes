@@ -1,0 +1,2 @@
+# Preserve the exact captured log whitespace.
+results/published/*.log -whitespace

@@ -1,0 +1,167 @@
+{
+  "executed_at": "2026-10-21T16:55:23.805106+00:00",
+  "python": "3.15.0",
+  "scope": "Architectural models only; no live AWS, MPC, HSM, or Ethereum signing.",
+  "records": [
+    {
+      "scenario": "compromised-signer-a",
+      "expected_quorum_control": false,
+      "actual_quorum_control": false,
+      "capabilities": [
+        "host-a",
+        "signer-a"
+      ],
+      "scope": "declared authority graph; no AWS IAM or MPC execution"
+    },
+    {
+      "scenario": "two-compromised-signers",
+      "expected_quorum_control": true,
+      "actual_quorum_control": true,
+      "capabilities": [
+        "host-a",
+        "host-b",
+        "signer-a",
+        "signer-b"
+      ],
+      "scope": "declared authority graph; no AWS IAM or MPC execution"
+    },
+    {
+      "scenario": "compromised-coordinator",
+      "expected_quorum_control": false,
+      "actual_quorum_control": false,
+      "capabilities": [
+        "coordinator",
+        "retain-portable-signed-bytes"
+      ],
+      "scope": "declared authority graph; no AWS IAM or MPC execution"
+    },
+    {
+      "scenario": "stolen-domain-a-role",
+      "expected_quorum_control": false,
+      "actual_quorum_control": false,
+      "capabilities": [
+        "deploy-a",
+        "host-a",
+        "signer-a"
+      ],
+      "scope": "declared authority graph; no AWS IAM or MPC execution"
+    },
+    {
+      "scenario": "shared-ci-deployment-authority",
+      "expected_quorum_control": true,
+      "actual_quorum_control": true,
+      "capabilities": [
+        "deploy-a",
+        "deploy-b",
+        "deploy-c",
+        "host-a",
+        "host-b",
+        "host-c",
+        "shared-deployer",
+        "signer-a",
+        "signer-b",
+        "signer-c"
+      ],
+      "scope": "declared authority graph; no AWS IAM or MPC execution"
+    },
+    {
+      "scenario": "malicious-domain-a-admin",
+      "expected_quorum_control": false,
+      "actual_quorum_control": false,
+      "capabilities": [
+        "admin-a",
+        "deploy-a",
+        "host-a",
+        "key-policy-a",
+        "share-a",
+        "signer-a"
+      ],
+      "scope": "declared authority graph; no AWS IAM or MPC execution"
+    },
+    {
+      "scenario": "compromised-kms-policy-a",
+      "expected_quorum_control": false,
+      "actual_quorum_control": false,
+      "capabilities": [
+        "key-policy-a",
+        "share-a"
+      ],
+      "scope": "declared authority graph; no AWS IAM or MPC execution"
+    },
+    {
+      "scenario": "organizations-without-member-admin-trust",
+      "expected_quorum_control": false,
+      "actual_quorum_control": false,
+      "capabilities": [
+        "org-management",
+        "remove-scp"
+      ],
+      "scope": "declared authority graph; no AWS IAM or MPC execution"
+    },
+    {
+      "scenario": "organizations-with-member-admin-trust",
+      "expected_quorum_control": true,
+      "actual_quorum_control": true,
+      "capabilities": [
+        "admin-a",
+        "admin-b",
+        "admin-c",
+        "deploy-a",
+        "deploy-b",
+        "deploy-c",
+        "host-a",
+        "host-b",
+        "host-c",
+        "key-policy-a",
+        "key-policy-b",
+        "key-policy-c",
+        "org-management",
+        "org-with-member-admin-trust",
+        "remove-scp",
+        "share-a",
+        "share-b",
+        "share-c",
+        "signer-a",
+        "signer-b",
+        "signer-c"
+      ],
+      "scope": "declared authority graph; no AWS IAM or MPC execution"
+    },
+    {
+      "scenario": "stale-signer-backup",
+      "expected": "backup-integrity",
+      "actual": "backup-integrity",
+      "scope": "local synthetic recovery state and HMAC fixture; no AWS restore"
+    },
+    {
+      "scenario": "stale-checkpoint",
+      "expected": "stale-checkpoint",
+      "actual": "stale-checkpoint",
+      "scope": "local synthetic recovery state and HMAC fixture; no AWS restore"
+    },
+    {
+      "scenario": "lost-checkpoint",
+      "expected": "missing-checkpoint",
+      "actual": "missing-checkpoint",
+      "scope": "local synthetic recovery state and HMAC fixture; no AWS restore"
+    },
+    {
+      "scenario": "compromised-recovery-operator",
+      "expected": "recovery-quorum",
+      "actual": "recovery-quorum",
+      "scope": "local synthetic recovery state and HMAC fixture; no AWS restore"
+    },
+    {
+      "scenario": "current-state-and-anchor",
+      "expected": "accepted",
+      "actual": "accepted",
+      "scope": "local synthetic recovery state and HMAC fixture; no AWS restore"
+    },
+    {
+      "scenario": "state-plus-anchor-rollback",
+      "expected": "accepted",
+      "actual": "accepted",
+      "scope": "local synthetic recovery state and HMAC fixture; no AWS restore"
+    }
+  ]
+}
