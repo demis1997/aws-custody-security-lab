@@ -2,6 +2,10 @@
 
 Executed **21 October 2026** on macOS ARM64. Terraform **1.9.8**, AWS provider **5.100.0**, Python **3.15.0**. The checked source includes seven modules and four independently operated deployment roots. Hosted CI uses Python 3.11 on Ubuntu; its workflow result is a separate execution record.
 
+## Provider portability
+
+The first Ubuntu workflow passed the model tests but failed provider schema loading because the lockfiles contained only the macOS installed-package hash. `terraform providers lock -platform=darwin_arm64 -platform=linux_amd64` then retrieved both packages signed by HashiCorp and added the Linux package hash. All four roots now carry both verified platform hashes. This fixes the lock portability without relaxing version pins, checksum verification, or read-only installation.
+
 ## Executed checks
 
 | Check | Actual result | Evidence and boundary |
